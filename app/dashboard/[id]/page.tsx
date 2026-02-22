@@ -11,6 +11,7 @@ import PricingTable from '@/components/PricingTable'
 import MessagingAnalysis from '@/components/MessagingAnalysis'
 import ContentStrategy from '@/components/ContentStrategy'
 import GapAnalysis from '@/components/GapAnalysis'
+import RefreshButton from '@/components/RefreshButton'
 
 export default async function AnalysisDetailPage({
   params,
@@ -91,12 +92,7 @@ export default async function AnalysisDetailPage({
               Scraping websites and analyzing competitive landscape...
             </p>
             <p className="text-gray-500 text-sm">This typically takes 2-3 minutes</p>
-            <button
-              onClick={() => window.location.reload()}
-              className="mt-6 px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
-            >
-              Refresh Page
-            </button>
+            <RefreshButton />
           </div>
         )}
 
