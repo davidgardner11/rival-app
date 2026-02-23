@@ -198,8 +198,8 @@ async function processAnalysis(
 
     updateProgress('Analysis complete!')
 
-    revalidatePath('/dashboard')
-    revalidatePath(`/dashboard/${analysisId}`)
+    // Note: revalidatePath cannot be called in async background functions in Next.js 15
+    // Users will need to manually refresh or we'll implement polling/SSE for updates
   } catch (error) {
     console.error('Processing error:', error)
 
@@ -212,7 +212,7 @@ async function processAnalysis(
       })
       .eq('id', analysisId)
 
-    revalidatePath('/dashboard')
+    // Note: revalidatePath cannot be called in async background functions in Next.js 15
   }
 }
 
