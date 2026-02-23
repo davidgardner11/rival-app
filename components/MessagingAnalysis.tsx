@@ -66,9 +66,9 @@ export default function MessagingAnalysis({ messagingData }: Props) {
                     {company.valueProps.map((prop, propIndex) => (
                       <li
                         key={propIndex}
-                        className="flex items-start gap-2 text-gray-300"
+                        className="flex items-center gap-2 text-gray-300"
                       >
-                        <span className="text-purple-400 mt-1 flex-shrink-0">
+                        <span className="text-purple-400 flex-shrink-0">
                           →
                         </span>
                         <span>{prop}</span>

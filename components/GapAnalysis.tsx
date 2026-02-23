@@ -39,9 +39,9 @@ export default function GapAnalysis({ gapAnalysis }: Props) {
               {gapAnalysis.opportunities.map((opportunity, index) => (
                 <li
                   key={index}
-                  className="flex items-start gap-3 text-gray-300"
+                  className="flex items-center gap-3 text-gray-300"
                 >
-                  <span className="text-green-400 mt-1 flex-shrink-0">→</span>
+                  <span className="text-green-400 flex-shrink-0">→</span>
                   <span>{opportunity}</span>
                 </li>
               ))}
@@ -60,8 +60,8 @@ export default function GapAnalysis({ gapAnalysis }: Props) {
           {gapAnalysis.unaddressed_needs.length > 0 ? (
             <ul className="space-y-3">
               {gapAnalysis.unaddressed_needs.map((need, index) => (
-                <li key={index} className="flex items-start gap-3 text-gray-300">
-                  <span className="text-yellow-400 mt-1 flex-shrink-0">→</span>
+                <li key={index} className="flex items-center gap-3 text-gray-300">
+                  <span className="text-yellow-400 flex-shrink-0">→</span>
                   <span>{need}</span>
                 </li>
               ))}

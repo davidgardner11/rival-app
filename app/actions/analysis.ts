@@ -79,7 +79,11 @@ async function processAnalysis(
     // Progress tracking helper
     const updateProgress = async (progress: string) => {
       console.log(`[${analysisId}] ${progress}`)
-      // Could emit progress events here for real-time updates
+      // Update progress in database for polling
+      await supabase
+        .from('analyses')
+        .update({ progress_message: progress })
+        .eq('id', analysisId)
     }
 
     // Step 1: Scrape target company
