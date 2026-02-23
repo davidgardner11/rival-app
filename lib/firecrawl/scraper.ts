@@ -139,7 +139,32 @@ export async function scrapeCompany(
   onProgress?.(`Scraping ${domain}/features...`)
   const features = await scrapeUrl(featuresUrl)
 
-  const pages = [homepage, pricing, features].filter((p) => p.markdown.length > 0)
+  // Try to find blog/content page for posting frequency analysis
+  // Common blog paths: /blog, /resources, /news, /updates, /insights
+  await delay(12000)
+  onProgress?.(`Scraping ${domain}/blog...`)
+  const blogPaths = ['/blog', '/resources', '/news', '/updates', '/insights']
+
+  let blog: ScrapedPage | null = null
+  for (const path of blogPaths) {
+    const blogUrl = `${normalized}${path}`
+    const result = await scrapeUrl(blogUrl)
+
+    // If we found a page with content, use it
+    if (result.markdown.length > 100) {
+      blog = result
+      break
+    }
+
+    // If not found, try next path (but respect rate limit)
+    if (blogPaths.indexOf(path) < blogPaths.length - 1) {
+      await delay(12000)
+    }
+  }
+
+  const pages = [homepage, pricing, features, blog].filter(
+    (p): p is ScrapedPage => p !== null && p.markdown.length > 0
+  )
 
   return {
     url: normalized,

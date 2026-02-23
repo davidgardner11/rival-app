@@ -67,7 +67,7 @@ Your analysis must include:
 
 3. **Messaging Analysis**: Analyze the homepage headline, primary CTA, and key value propositions for each company. What is their positioning strategy?
 
-4. **Content Strategy**: If blog/content is available, identify the main topics they write about, estimated posting frequency, and recent themes.
+4. **Content Strategy**: If blog/content is available, identify the main topics they write about, estimated posting frequency (look for publication dates in the blog listing to calculate frequency like "Daily", "2-3x per week", "Weekly", "Bi-weekly", "Monthly", or "Infrequent"), and recent themes. If no blog content is found, set postingFrequency to null (not "Unknown").
 
 5. **Gap Analysis**: Identify opportunities in the market that NO competitor is addressing. What needs are unmet? Where is there white space?
 

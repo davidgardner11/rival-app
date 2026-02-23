@@ -31,11 +31,13 @@ export default function ContentStrategy({ contentData }: Props) {
               </h3>
 
               {/* Posting Frequency */}
-              {company.postingFrequency && (
-                <div className="mb-4 inline-block px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm font-medium">
-                  {company.postingFrequency}
-                </div>
-              )}
+              {company.postingFrequency &&
+                company.postingFrequency !== 'Unknown' &&
+                company.postingFrequency !== 'null' && (
+                  <div className="mb-4 inline-block px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm font-medium">
+                    {company.postingFrequency}
+                  </div>
+                )}
 
               {/* Main Topics */}
               {company.topics.length > 0 && (
