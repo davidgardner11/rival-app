@@ -258,9 +258,11 @@ Response format: ["Competitor 1", "Competitor 2", "Competitor 3"]`,
 
     const competitors: string[] = JSON.parse(jsonText)
 
+    console.log('Successfully extracted competitors:', competitors)
     return competitors.slice(0, 5) // Max 5 competitors
   } catch (error) {
     console.error('Error extracting competitors:', error)
+    console.error('Failed to parse JSON. Raw response:', content_response.type === 'text' ? content_response.text : 'non-text response')
     return []
   }
 }

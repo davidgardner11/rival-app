@@ -121,7 +121,35 @@ async function processAnalysis(
     const competitorNames = await extractCompetitors(targetCompany)
 
     if (!competitorNames.length) {
-      throw new Error('No competitors found')
+      // No competitors found - continue with target-only analysis
+      updateProgress('No competitors found - analyzing target company only...')
+      console.warn(`[${analysisId}] No competitors found for ${domain}`)
+
+      // Run analysis with just the target company
+      const analysisResult = await analyzeCompetitors(targetCompany, [])
+
+      // Update analysis record with results
+      const { error: updateError } = await supabase
+        .from('analyses')
+        .update({
+          target_company_id: companyRecord.id,
+          competitor_company_ids: [],
+          feature_matrix: analysisResult.feature_matrix,
+          pricing_comparison: analysisResult.pricing_comparison,
+          messaging_analysis: analysisResult.messaging_analysis,
+          content_strategy: analysisResult.content_strategy,
+          gap_analysis: analysisResult.gap_analysis,
+          status: 'completed',
+          completed_at: new Date().toISOString(),
+        })
+        .eq('id', analysisId)
+
+      if (updateError) {
+        throw updateError
+      }
+
+      updateProgress('Analysis complete!')
+      return
     }
 
     updateProgress(`Found ${competitorNames.length} competitors`)
